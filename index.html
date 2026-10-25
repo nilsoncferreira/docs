@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acervo docente – Nilson Clementino Ferreira</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#101319">
+<meta property="og:title" content="Acervo docente – Nilson Clementino Ferreira">
+<meta property="og:type" content="website">
+<meta name="description" content="Acervo documental e painel de atividades docentes de Nilson Clementino Ferreira (UFG), organizado por categoria e em ordem cronológica.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d4e89'/%3E%3Cpath d='M8 22V10m5 12V14m5 8V8m5 14v-6' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css?v=20261025">
+<script>var t='dark';try{t=localStorage.getItem('theme')||'dark'}catch(e){}document.documentElement.dataset.theme=t;</script>
+</head>
+<body>
+<noscript><p style="padding:24px;font-family:sans-serif">Este site precisa de JavaScript para funcionar.</p></noscript>
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#acervo" aria-label="Início">
+      <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><rect width="32" height="32" rx="7" fill="currentColor"/><path d="M8 22V10m5 12V14m5 8V8m5 14v-6" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
+      <span><b>Nilson Clementino Ferreira</b><small>Acervo para progressão a Professor Titular · UFG</small></span>
+    </a>
+    <nav class="tabs" aria-label="Seções" role="tablist">
+      <button role="tab" data-view="acervo" aria-selected="true">Acervo</button>
+      <button role="tab" data-view="linha" aria-selected="false">Linha do tempo</button>
+      <button role="tab" data-view="painel" aria-selected="false">Painel</button>
+      <button role="tab" data-view="relatorios" aria-selected="false">Relatórios anuais</button>
+    </nav>
+    <button class="icon-btn" id="theme" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ACERVO -->
+<section id="v-acervo" class="view" aria-label="Acervo">
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Mais de quarenta anos de trabalho em <span id="n-docs">194</span> documentos</h1>
+      <p>Diplomas, certificados, declarações, bancas, orientações e relatórios de atividade docente, de <span id="y-min">1984</span> a <span id="y-max">2025</span>. Arraste sobre a régua para filtrar por período.</p>
+    </div>
+    <div class="ruler-wrap">
+      <svg id="ruler" role="img" aria-label="Régua cronológica com um traço por documento. Arraste para selecionar um período."></svg>
+      <div class="ruler-legend" id="ruler-legend"></div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></svg>
+      <input id="q" type="search" placeholder="Buscar por título, instituição ou descrição" aria-label="Buscar documentos" autocomplete="off">
+    </div>
+    <div class="seg" role="group" aria-label="Organização">
+      <button data-mode="cat" aria-pressed="true">Por categoria</button>
+      <button data-mode="year" aria-pressed="false">Por ano</button>
+    </div>
+    <div class="seg" role="group" aria-label="Ordem">
+      <button data-order="asc" aria-pressed="true">Mais antigos primeiro</button>
+      <button data-order="desc" aria-pressed="false">Mais recentes primeiro</button>
+    </div>
+    <label class="check" title="Desfoca miniaturas de documentos pessoais (RG, CPF, diplomas, etc.)"><input type="checkbox" id="blur"> Desfocar documentos pessoais</label>
+  </div>
+
+  <div class="layout">
+    <aside class="filters" aria-label="Filtrar por categoria">
+      <div class="filters-head"><h2>Categorias</h2><button class="link" id="clear">Limpar filtros</button></div>
+      <ul id="cats"></ul>
+    </aside>
+    <div class="results">
+      <p class="count" id="count" aria-live="polite"></p>
+      <div id="list"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LINHA DO TEMPO -->
+<section id="v-linha" class="view" hidden aria-label="Linha do tempo">
+  <div class="page-head">
+    <h1>Linha do tempo</h1>
+    <p>Cada ponto é um documento; faixas indicam o período de eventos e cursos. Clique em um ponto para abrir.</p>
+    <div class="seg" id="range" role="group" aria-label="Período"></div>
+  </div>
+  <div class="tl-wrap"><svg id="timeline" role="img" aria-label="Linha do tempo dos documentos por categoria"></svg></div>
+</section>
+
+<!-- PAINEL -->
+<section id="v-painel" class="view" hidden aria-label="Painel">
+  <div class="page-head">
+    <h1>Painel</h1>
+    <p>Números extraídos do acervo e dos relatórios anuais (RADOC 2010–2021 e SICAD+ 2022–2025).</p>
+  </div>
+  <dl class="kpis" id="kpis"></dl>
+  <div id="panel"></div>
+</section>
+
+<!-- RELATÓRIOS -->
+<section id="v-relatorios" class="view" hidden aria-label="Relatórios anuais">
+  <div class="page-head">
+    <h1>Relatórios anuais</h1>
+    <p>Os 16 relatórios de atividade docente, com o conteúdo de cada ano em tabelas. Escolha o ano.</p>
+    <div class="years" id="years" role="group" aria-label="Ano"></div>
+  </div>
+  <div id="report"></div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <p><a id="drive-link" href="https://drive.google.com/drive/folders/15L8JhXmXdvmCTdfVuy499cZT7glCuXCf" target="_blank" rel="noopener">Abrir a pasta completa no Google Drive</a> · Acervo pessoal organizado para consulta. Documentos com dados pessoais devem ser tratados com cuidado.</p>
+</footer>
+
+<dialog id="viewer" aria-label="Visualizador de documento">
+  <div class="v-bar">
+    <div class="v-title"><b id="v-t"></b><span id="v-sub"></span></div>
+    <div class="v-actions">
+      <button class="icon-btn" id="v-prev" aria-label="Documento anterior" title="Anterior (←)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="icon-btn" id="v-next" aria-label="Próximo documento" title="Próximo (→)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+      <button class="icon-btn" id="v-rl" aria-label="Girar à esquerda" title="Girar à esquerda" hidden><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v6h6"/><path d="M5.5 15a8 8 0 1 0 1.2-8.3L4 10"/></svg></button>
+      <button class="icon-btn" id="v-rr" aria-label="Girar à direita (R)" title="Girar à direita (R)" hidden><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4v6h-6"/><path d="M18.5 15a8 8 0 1 1-1.2-8.3L20 10"/></svg></button>
+      <button class="icon-btn" id="v-zout" hidden aria-label="Diminuir" title="Diminuir (−)">−</button>
+      <button class="icon-btn" id="v-zin" hidden aria-label="Ampliar" title="Ampliar (+)">+</button>
+      <a class="btn" id="v-open" target="_blank" rel="noopener">Abrir original</a>
+      <button class="icon-btn" id="v-close" aria-label="Fechar" title="Fechar (Esc)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="v-body">
+    <div class="v-stage" id="v-stage"></div>
+    <aside class="v-meta" id="v-meta"></aside>
+  </div>
+</dialog>
+
+<div id="tip" class="tip" role="status" hidden></div>
+
+<script defer src="assets/vendor/d3.min.js?v=20261025"></script>
+<script defer src="assets/js/data.js?v=20261025"></script>
+<script defer src="assets/js/thumbs.js?v=20261025"></script>
+<script defer src="assets/js/app.js?v=20261025"></script>
+<script defer src="assets/js/viz.js?v=20261025"></script>
+</body>
+</html>
